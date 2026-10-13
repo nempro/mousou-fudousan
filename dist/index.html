@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="あなたの理想の家、査定いたします。理想の住まいを自由に入力して、好きな生成AIに持ち込める架空物件の査定依頼書を作成。">
+  <meta name="theme-color" content="#243d34">
+  <title>妄想不動産｜あなたの理想の家、査定いたします。</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=20261013b">
+  <script src="prompt-v0.4.js" defer></script>
+  <script src="app.js?v=20261013" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand"><svg aria-hidden="true" viewBox="0 0 36 40"><path d="M3 36V16L18 4l15 12v20H3Zm9 0V23h12v13M3 17h30M18 4V0"/></svg><span>妄想不動産<small>MOUSOU FUDOUSAN</small></span></div>
+    <span class="header-note">あらゆる世界の、まだ見ぬ住まい。</span>
+  </header>
+  <main>
+    <div class="appraisal-layout">
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">理想の住まいの査定窓口</p>
+      <h1 id="page-title"><span>あなたの理想の家、</span><span>査定いたします。</span></h1>
+      <p class="intro-subtitle">まだ存在しない邸宅にも、価値がある。</p>
+    </section>
+
+    <section class="request-panel" aria-labelledby="form-title">
+      <div class="panel-heading"><div><p class="eyebrow">査定依頼書の作成</p><h2 id="form-title"><span>どんな家に、</span><span>暮らしたいですか。</span></h2></div><span>すべて任意</span></div>
+      <form id="request-form">
+        <label class="field-label" for="dream">理想の家・こだわり</label>
+        <textarea id="dream" name="dream" rows="4" placeholder="例：玄関は大きな吹き抜けで、正面には大階段。ステンドグラスの窓と、秘密の図書室が欲しい。" aria-describedby="dream-help"></textarea>
+        <p class="field-help" id="dream-help">文章だけでも、下の選択だけでも。選択肢にない希望も自由にどうぞ。</p>
+        <div class="select-grid">
+          <div class="field"><label for="world">世界観</label><select id="world" name="world"><option value="">指定なし</option><option>現代</option><option>中世</option><option>ファンタジー</option><option>未来・SF</option><option>レトロ</option></select></div>
+          <div class="field"><label for="building">建物の種類</label><select id="building" name="building"><option value="">指定なし</option><option>戸建て</option><option>マンション</option><option>洋館・城</option><option>小屋・別荘</option><option>その他</option></select></div>
+          <div class="field"><label for="floors">階数</label><select id="floors" name="floors"><option value="">指定なし</option><option>平屋</option><option>2階建て</option><option>3階建て</option><option>4階以上</option></select></div>
+          <div class="field"><label for="basement">地下室</label><select id="basement" name="basement"><option value="">指定なし</option><option>あり</option><option>なし</option></select></div>
+          <div class="field"><label for="location">立地・周辺環境</label><select id="location" name="location"><option value="">指定なし</option><option>都市</option><option>郊外</option><option>田園</option><option>山・森</option><option>海辺</option><option>湖畔</option><option>空中</option><option>地下</option><option>その他</option></select></div>
+          <div class="field"><label for="size">広さ</label><select id="size" name="size"><option value="">指定なし</option><option>コンパクト</option><option>一般的</option><option>広々</option><option>大邸宅</option></select></div>
+        </div>
+        <div class="issue-area"><button id="issue-button" class="button primary" type="submit" disabled aria-describedby="issue-help">査定依頼書を発行 <span aria-hidden="true">→</span></button><p id="issue-help" class="field-help" aria-live="polite">こだわりを入力するか、条件を1つ選ぶと発行できます。</p></div>
+      </form>
+      <noscript><p class="error">査定依頼書の発行には、ブラウザのJavaScriptを有効にしてください。</p></noscript>
+      <section id="result" class="result" aria-labelledby="result-title" hidden>
+        <p class="eyebrow">あなたの一軒への、第一歩。</p>
+        <h2 id="result-title" tabindex="-1">査定依頼書ができました</h2>
+        <p>好きなAIに貼り付けて査定してもらってください。</p>
+        <button id="copy-button" class="button primary" type="button">指示文をコピー <span aria-hidden="true">↗</span></button>
+        <p id="copy-status" class="field-help" role="status"></p>
+        <nav class="ai-links" aria-label="査定を依頼するAI（新しいタブで開きます）"><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT <span aria-hidden="true">↗</span></a><a href="https://gemini.google.com/app" target="_blank" rel="noopener noreferrer">Gemini <span aria-hidden="true">↗</span></a><a href="https://claude.ai/" target="_blank" rel="noopener noreferrer">Claude <span aria-hidden="true">↗</span></a></nav>
+        <p class="field-help">リンクは新しいタブで開きます。入力内容は自動送信されません。</p>
+        <details id="prompt-details"><summary>指示文を確認</summary><p id="manual-copy-help" class="manual-copy-help" hidden></p><label class="sr-only" for="prompt-preview">発行した指示文（読み取り専用）</label><textarea id="prompt-preview" readonly rows="12" spellcheck="false" aria-describedby="manual-copy-help"></textarea></details>
+      </section>
+    </section>
+    <figure class="hero-property" aria-labelledby="featured-title">
+      <div class="hero-media"><img src="images/tsukikage_geihinkan.png" alt="月影の迎賓館。森の中に建つ石造りの大邸宅。左右に翼棟を持つ正面玄関と庭園。" width="1536" height="1024" decoding="async" fetchpriority="high"><span class="media-index">特選物件 No.001</span></div>
+      <figcaption>
+        <div class="featured-heading"><div><p class="featured-kicker">特選物件 No.001</p><h2 id="featured-title">月影の迎賓館</h2></div><p class="featured-price"><span>架空査定額</span><strong>2,800<small>万円</small></strong></p></div>
+        <p class="featured-catch">歴史と格式を受け継ぐ、森の中の大邸宅。</p>
+        <p class="featured-overview">森に囲まれた歴史ある大邸宅。延床面積は約1,200㎡。豪華な大広間と多数の居室を備え、建物の保存状態は良好です。</p>
+        <p class="featured-ballroom">毎晩午前2時、大広間で舞踏会が開催されます。参加者は全員故人です。</p>
+        <blockquote class="featured-appraisal"><span>査定担当者所見</span>「建物の保存状態は良好ですが、毎晩午前2時に大広間で舞踏会が開催されるため、夜間の静穏性については評価を引き下げています。」</blockquote>
+      </figcaption>
+    </figure>
+    </div>
+
+    <section class="example-section" aria-labelledby="example-title">
+      <div class="section-heading"><div><p class="eyebrow">妄想不動産 物件選集</p><h2 id="example-title"><span>例えば、こんなお家が</span><span>ございます。</span></h2></div><p>時代も、広さも、世界も越えて。<br>住まいの価値は、ひとつではありません。</p></div>
+      <div class="property-grid">
+      <article class="property-card">
+        <div class="property-media mansion"><img src="images/sueikan.png" alt="翠影館。尖塔と大きな窓を備えた石造りの洋館。" width="1536" height="509" loading="lazy" decoding="async"><span class="media-index">01 / 歴史ある洋館</span></div>
+        <div class="property-copy"><p class="property-location">山・森 ／ 2階建ての洋館</p><h3>翠影館<span>すいえいかん</span></h3><p class="property-catch">木漏れ日と、読みかけの物語と。</p><p class="valuation"><span class="valuation-label">架空査定額</span><span class="valuation-amount">3億8,000<span class="valuation-unit">万円</span></span></p><p class="appraisal">「森を借景にした図書室は、本のための部屋であると同時に、時間を忘れるための贅沢です。」</p><details><summary>作例の詳細を見る</summary><div class="example-details"><p>深い緑に囲まれた2階建ての洋館。吹き抜けの玄関、大階段、ステンドグラス、そして書棚の奥の秘密の図書室を備えます。</p><p><strong>特別査定｜金額換算困難</strong><br>秋の午後、ステンドグラスの光が図書室への廊下を琥珀色に染めます。季節の移ろいまでが、この館の調度品です。</p></div></details></div>
+      </article>
+      <article class="property-card">
+        <div class="property-media modern"><img src="images/yohaku_no_ie.png" alt="余白の家。木々の間に建つ平屋と、庭に面した木のデッキ。" width="765" height="508" loading="lazy" decoding="async"><span class="media-index">02 / 現代の小さな住宅</span></div>
+        <div class="property-copy"><p class="property-location">郊外 ／ コンパクトな平屋</p><h3>余白の家<span>よはくのいえ</span></h3><p class="property-catch">小さく住んで、ゆったり暮らす。</p><p class="valuation"><span class="valuation-label">架空査定額</span><span class="valuation-amount">4,200<span class="valuation-unit">万円</span></span></p><p class="appraisal">「一坪の中庭が、家じゅうに光と季節を運びます。面積以上の広がりを感じる一邸です。」</p><details><summary>作例の詳細を見る</summary><div class="example-details"><p>延床約55㎡の平屋。中庭に向かって開くリビングと、窓辺の小さな書斎。必要なものに手が届く、穏やかな住まいです。</p><p><strong>特別査定｜金額換算困難</strong><br>朝の光が食卓に届き、雨音が中庭に落ちる。家の中にいながら、日々の小さな変化を味わえます。</p></div></details></div>
+      </article>
+      <article class="property-card">
+        <div class="property-media fantasy"><img src="images/hoshiwatari_no_tou.png" alt="星渡りの塔。雲海に浮かぶ島の白い塔と、島を結ぶ橋や滝。" width="765" height="508" loading="lazy" decoding="async"><span class="media-index">03 / ファンタジーの住まい</span></div>
+        <div class="property-copy"><p class="property-location">空中の浮島 ／ 星を望む塔</p><h3>星渡りの塔<span>ほしわたりのとう</span></h3><p class="property-catch">雲の上で、星の帰りを待つ。</p><p class="valuation"><span class="valuation-label">架空査定額</span><span class="valuation-amount">860<span class="valuation-unit">万金貨</span></span></p><p class="appraisal">「夜ごとに移ろう星々が、この家の天井画。飛竜便の桟橋を備え、地上への往来も良好です。」</p><details><summary>作例の詳細を見る</summary><div class="example-details"><p>雲海に浮かぶ島に建つ3階建ての石造塔。星見の寝室、薬草の温室、屋上の観測室を備え、麓の街とは定期飛竜便で結ばれています。</p><p><strong>特別査定｜金額換算困難</strong><br>年に一度、渡り鳥のように星の群れが島の傍らを通ります。観測室の窓から迎える、この土地だけの季節です。</p></div></details></div>
+      </article>
+      </div>
+      <p class="examples-note">掲載文・査定額は紹介用のオリジナル作例です。</p>
+    </section>
+    <aside class="about"><h2>まだ見ぬ家の価値を、想像しよう。</h2><p>妄想不動産は、理想の家を生成AIに査定してもらう遊びです。<br>このサイトは依頼書を作成します。査定と画像生成は、移動先のAIでお楽しみください。</p><p class="field-help">入力内容はこのサイトに保存・送信されません。ページを閉じると失われます。<br>掲載されている物件・査定内容はフィクションです。物件画像はAIによって生成されたイメージです。<br>実際の不動産鑑定ではありません。</p></aside>
+  </main>
+  <footer><span>妄想不動産</span><span>Daydream Property <span aria-hidden="true">/</span> Web v0.3</span></footer>
+</body>
+</html>
