@@ -1,5 +1,15 @@
 # 検証記録
 
+## 初回公開（2026-10-13、日本時間）
+
+- Publicリポジトリ：[nempro/mousou-fudousan](https://github.com/nempro/mousou-fudousan)。初回公開コミットは `2457948f25156d36bb1272b546a0a89642129c31`。`main` のローカルとリモートが一致することを確認。
+- Pagesの公開元はGitHub Actions。最初のpush時の実行はPages未設定のため失敗。その後Pagesを有効にし、[手動実行 38400847478](https://github.com/nempro/mousou-fudousan/actions/runs/38400847478) が同コミットで成功。GitHubから取得した公開URLは [https://nempro.github.io/mousou-fudousan/](https://nempro.github.io/mousou-fudousan/)。
+- 公開URLでHTML、CSS、JavaScript 2件、favicon、画像4件のHTTP 200を確認。実ブラウザでも画像4件がすべて読み込まれ、コンソールの警告・エラーなし。
+- 公開URLのフォームで自由記入「森の図書室」から3571文字の依頼書を発行。プレビュー展開と全文コピーを確認し、クリップボードとプレビューが完全一致。入力を消すと旧結果が非表示になり、選択条件（3階建て・地下室あり）で再発行した本文に旧入力が残らないことを確認。ChatGPT・Gemini・ClaudeのHTTPSリンクと別タブ設定も確認。
+- PC 1440px、390px、320pxの実ブラウザ表示で画像欠落・横はみ出しなし。実機iOS／Androidは未検証。提供された作例画像3件の権利書類はローカル記録から確認できていない。
+
+以下は公開前の各時点での記録です。「未公開」などの記述は当時の状態を示します。
+
 ## 名称統一・公開前最終確認（2026-10-13、日本時間）
 
 - ローカルGitリポジトリを親プロジェクト直下の `Mousou Fudousan/` に移動。旧フォルダは存在せず、新フォルダで `git rev-parse --show-toplevel` が一致。`main` は初回コミット前、リモート設定なし。コミット・push・GitHubリポジトリ作成・公開は未実施。

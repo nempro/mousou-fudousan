@@ -80,22 +80,12 @@ node --test tests/request.test.cjs
 
 実施結果と環境差による未検証事項は `VERIFICATION.md` を参照してください。
 
-## GitHub Pagesで公開するとき
+## GitHub Pages公開
 
-プロジェクトサイト（`https://<GitHubユーザー名>.github.io/mousou-fudousan/`）を想定しています。HTML内のCSS・JavaScript・favicon・画像は相対パスなので、サイトがリポジトリ名の下に置かれても読み込めます。GitHubユーザー名は未確定です。
+サイト：[妄想不動産](https://nempro.github.io/mousou-fudousan/) ／ リポジトリ：[nempro/mousou-fudousan](https://github.com/nempro/mousou-fudousan)
 
-推奨する配置は、同梱の `.github/workflows/pages.yml` を使い、`main` の `dist/` **の中身をサイトのルート**としてGitHub Pagesへ送る方法です。ビルドも追加パッケージも不要で、更新時に公開用ブランチへファイルを手作業で写す必要がありません。Pages設定の「Deploy from a branch」では公開元フォルダに `/dist` を直接選べません。ブランチ方式を採る場合は、別の公開専用ブランチのルートに `dist/` の中身だけを配置します。ブランチ方式はActions用の設定ファイルを要しませんが、更新のたびにそのブランチを同期する必要があります。
+GitHub Pagesの公開元はGitHub Actionsです。`.github/workflows/pages.yml` が `main` の `dist/` の中身をサイトのルートとして配信します。HTML内のCSS・JavaScript・favicon・画像は相対パスで、ビルドや追加パッケージは不要です。`main` へのpushで再配信されます。公開URLでの確認結果は `VERIFICATION.md` に記録しています。
 
-設定方法は[GitHub公式の公開元設定](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)に従います。
-
-公開はまだ行っていません。承認後の順番は次のとおりです。
-
-1. 公開先のGitHubアカウントと提供画像3件の公開権限を確認する。リポジトリ名は `mousou-fudousan`。公開リポジトリでは `README.md`、検証記録、共通プロンプトを含むGit管理ファイルが閲覧可能になります。
-2. 初回コミット候補（`.gitignore`、`.github/workflows/pages.yml`、`README.md`、`VERIFICATION.md`、`dist/`、`tests/`）を確認し、コミットする。
-3. GitHubにリポジトリを用意し、リモートを登録して `main` をpushする。この時点ではPagesが未設定のため、最初のworkflow実行が失敗する場合があります。
-4. リポジトリの **Settings → Pages → Build and deployment → Source** で **GitHub Actions** を選び、必要ならActions画面から **Publish dist to GitHub Pages** を手動実行する。以後は `main` へのpushで更新されます。
-5. 表示された公開URLで4画像、favicon、フォームの発行と全文コピー、AIリンクを確認する。実サイトのURLと表示状態は公開後に初めて確認できます。
-
-サイトは創作上の娯楽であり、実際の不動産鑑定ではありません。現在は未コミット・未公開です。
+サイトは創作上の娯楽であり、実際の不動産鑑定ではありません。
 
 サイト内AI査定・画像生成、ログイン、履歴、投稿、サーバーへの入力保存、3D家づくりは対象外です。
